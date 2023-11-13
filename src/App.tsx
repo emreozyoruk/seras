@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-
+import Home from './components/Home';
+import Instructor from './components/Instructor';
+import InstructorList from './components/InstructorList';
+import Request from './components/Request';
+import EventAction from './components/EventAction';
+import {instructorList} from "./components/PropsType"
+import LoginCheck from './components/LoginCheck';
+import ContextExample from "./components/ContextExample"
+import  {ThemeContextProvider}  from './components/ThemeContext';
 function App() {
+
+  const [dogru , setDogru] = useState(true)
+
+  const kursDegistir = () => {
+         setDogru(!dogru)   
+  }
+
+  const instructor = {
+    firstName : "Emre" , 
+    lastName : "Özyörük"
+   }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Home name="Emre" courseNumber={15} isBest ={dogru} />
+    <button onClick={kursDegistir}  > Kurs Tipi Değiştir </button>
+    <br /><br />
+    <Instructor fullName = {instructor} /> 
+    <InstructorList  aileList = {instructorList} />
+    <Request status = "loading" />
+    <EventAction  />
+    <LoginCheck />
+    <ThemeContextProvider>
+    <ContextExample />
+    </ThemeContextProvider>
     </div>
   );
 }
